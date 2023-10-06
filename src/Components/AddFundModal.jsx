@@ -13,7 +13,7 @@ export default function AddContributorModal({
         className="absolute w-full h-full left-0 top-0 bg-black/80"
         onClick={close}
       ></div>
-      <main className="absolute w-1/3 p-4 px-8 bg-white left-1/2 -translate-x-1/2 mt-10 z-10">
+      <main className="absolute w-[800px] p-4 px-8 bg-white left-1/2 -translate-x-1/2 mt-10 z-10">
         <h2 className="text-center text-xl">Add a Fund</h2>
         <div>
           <label htmlFor="selectedCont">Contributor</label>
@@ -24,9 +24,9 @@ export default function AddContributorModal({
             onChange={(e) => setContName(e.target.value)}
           >
             <option>Select Contributor</option>
-            {contributors.map((c, i) => (
-              <option value={c} key={c + i}>
-                {c}
+            {contributors.data.map((c) => (
+              <option value={c["_id"]} key={c["_id"]}>
+                {c.name}
               </option>
             ))}
           </select>

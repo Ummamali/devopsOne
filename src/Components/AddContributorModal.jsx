@@ -28,7 +28,6 @@ export default function AddContributorModal({ close, addContributor }) {
           onClick={(e) => {
             if (nameVal) {
               addContributor(nameVal);
-              close();
             }
           }}
         >
