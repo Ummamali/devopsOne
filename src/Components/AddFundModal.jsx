@@ -25,7 +25,7 @@ export default function AddContributorModal({
           >
             <option>Select Contributor</option>
             {contributors.data.map((c) => (
-              <option value={c["_id"]} key={c["_id"]}>
+              <option value={c.name} key={c["_id"]}>
                 {c.name}
               </option>
             ))}

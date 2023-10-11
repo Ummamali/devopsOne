@@ -4,6 +4,7 @@ import AddFundModal from "./Components/AddFundModal";
 import List from "./Components/List";
 import { backend } from "./config";
 import StatusBar from "./Components/StatusBar";
+import Mountains from "./imgs/mountains.svg";
 
 function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -48,14 +49,18 @@ function App() {
     }
   }
 
-  const [fundings, setFundings] = useState({ status: "loading", data: [] });
+  const [fundings, setFundings] = useState({ status: "good", data: [] });
 
   function addFunding(name, amount) {
     setFundings((prev) => {
-      const newFundings = [
-        ...prev,
-        { name, amount, id: name + getRndInteger(1, 1000) + amount },
-      ];
+      const newFundings = {
+        status: "good",
+        data: [
+          ...prev.data,
+          { name, amount, id: name + getRndInteger(1, 1000) + amount },
+        ],
+      };
+
       return newFundings;
     });
   }
@@ -63,12 +68,12 @@ function App() {
   function deleteFundItem(fundId) {
     setFundings((prev) => {
       const newOne = [];
-      for (const item of prev) {
+      for (const item of prev.data) {
         if (item.id !== fundId) {
           newOne.push(item);
         }
       }
-      return newOne;
+      return { status: "good", data: newOne };
     });
   }
 
@@ -90,26 +95,27 @@ function App() {
           />
         )}
         <div className="text-center">
+          <img src={Mountains} className="w-36 block mx-auto mb-4"></img>
           <h1 className="text-3xl">Contributions Manager</h1>
           <small>Manage your contributions here</small>
         </div>
         <div className="flex items-center justify-center mt-4 space-x-2 text-sm">
           <button
-            className="bg-green-400 p-2 rounded-sm block disabled:opacity-50"
+            className="bg-green-500 p-2 rounded-sm block disabled:opacity-50"
             onClick={() => setAddCont((prev) => !prev)}
             disabled={contributors.status === "loading"}
           >
             Add Contributor
           </button>
           <button
-            className="bg-green-400 p-2 rounded-sm block disabled:opacity-50"
+            className="bg-green-500 p-2 rounded-sm block disabled:opacity-50"
             onClick={() => setAddFund((prev) => !prev)}
             disabled={contributors.status === "loading"}
           >
             Add a Fund
           </button>
         </div>
-        {/* <List fundings={fundings} deleteFundItem={deleteFundItem} /> */}
+        <List fundings={fundings} deleteFundItem={deleteFundItem} />
       </div>
     </main>
   );
