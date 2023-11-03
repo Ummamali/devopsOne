@@ -2,7 +2,7 @@
 
 const cfg = {
   backend: {
-    host: "http://18.232.159.160:5500",
+    host: "http://localhost:5500",
   },
 };
 
